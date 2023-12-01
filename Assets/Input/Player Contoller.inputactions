@@ -15,7 +15,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Fire",
+                    "name": "Attack",
                     "type": "Value",
                     "id": "c7eebfd7-524e-42e3-b940-bec87e8e192f",
                     "expectedControlType": "",
@@ -87,7 +87,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyobard",
-                    "action": "Fire",
+                    "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
