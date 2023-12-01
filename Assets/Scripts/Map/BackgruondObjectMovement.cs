@@ -14,6 +14,10 @@ public class BackgruondObjectMovement : MonoBehaviour
     {
         Move(mySpeed);
     }
+    void OnBecameInvisible()
+    {
+        this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, 38.5f, 0);
+    }
 
     void Move(float _speed)
     {
