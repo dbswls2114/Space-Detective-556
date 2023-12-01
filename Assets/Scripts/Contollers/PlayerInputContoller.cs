@@ -11,9 +11,9 @@ public class PlayerInputContoller : PlayerCharacterContoller
     Animator anim;
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
-    
 
-    
+
+
     private void Awake()
     {
         _camera = Camera.main;
@@ -21,12 +21,12 @@ public class PlayerInputContoller : PlayerCharacterContoller
         rigid = GetComponent<Rigidbody2D>();
         rigid.freezeRotation = true;
         spriteRenderer = GetComponent<SpriteRenderer>();
-        anim = GetComponent<Animator>();  
-    }   
-      
-
-
+        anim = GetComponent<Animator>();
     }
+
+
+
+
     public void OnMove(InputValue value)
     {
         Vector2 moveInput = value.Get<Vector2>().normalized;
@@ -37,5 +37,4 @@ public class PlayerInputContoller : PlayerCharacterContoller
     {
         IsAttacking = value.isPressed;
     }
-
 }
