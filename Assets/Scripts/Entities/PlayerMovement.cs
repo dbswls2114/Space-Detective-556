@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DetectiveMovement : MonoBehaviour
+public class PlayeriveMovement : MonoBehaviour
 {
-    private DetectiveCharacterContoller _controller;
+    private PlayerCharacterContoller _controller;
 
     private Vector2 _movementDirection = Vector2.zero;
     private Rigidbody2D _rigidbody;
 
     private void Awake()
     {
-        _controller = GetComponent<DetectiveCharacterContoller>();
+        _controller = GetComponent<PlayerCharacterContoller>();
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
