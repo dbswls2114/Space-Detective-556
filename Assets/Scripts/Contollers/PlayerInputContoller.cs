@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInputContoller : DetectiveCharacterContoller
+public class PlayerInputContoller : PlayerCharacterContoller
 {
     private Camera _camera;
 
@@ -13,8 +13,12 @@ public class PlayerInputContoller : DetectiveCharacterContoller
     }
     public void OnMove(InputValue value)
     {
-        Vector2 LookInput = value.Get<Vector2>().normalized;
-        CallMoveEvent(LookInput);
+        Vector2 moveInput = value.Get<Vector2>().normalized;
+        CallMoveEvent(moveInput);
     }
 
+    public void OnAttack(InputValue value)
+    {
+        IsAttacking = value.isPressed;
+    }
 }
