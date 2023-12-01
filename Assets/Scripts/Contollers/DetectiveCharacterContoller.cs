@@ -8,10 +8,19 @@ public class DetectiveCharacterContoller : MonoBehaviour
     public event Action<Vector2> OnMoveEvent;
     //public event Action<Vector2> OnFireEvent;
 
+    float direction = 0.05f;
+
     public void CallMoveEvent(Vector2 direction)
     {
         OnMoveEvent?.Invoke(direction);
     }
+
+    private void Update()
+    {
+        
+    }
+
+
 
     //public void CallMoveEvent(Vector2 direction)
     //{
