@@ -11,9 +11,9 @@ public class PlayerInputContoller : PlayerCharacterContoller
     Animator anim;
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
-    
 
-    
+
+
     private void Awake()
     {
         _camera = Camera.main;
@@ -37,5 +37,4 @@ public class PlayerInputContoller : PlayerCharacterContoller
     {
         IsAttacking = value.isPressed;
     }
-
 }
