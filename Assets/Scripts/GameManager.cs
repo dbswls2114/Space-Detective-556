@@ -29,10 +29,10 @@ public class GameManager : MonoBehaviour
         Time.timeScale= 1.0f;
         TotalScore = 0;
         //GameOver();
-        UpdateScore(0);
-
+        UpdateScore(0); //점수 초기화 
     }
-    void Update(){
+    
+    void Update(){ 
         NumberOfEnemies = GameObject.FindGameObjectsWithTag("Enemy"); 
         if(NumberOfEnemies.Length == 0){ //enemies가 0일때 
             //다음 레벨로?? 아님 클리어?? 
