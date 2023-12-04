@@ -195,7 +195,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: 0
   speed: 3
-  enemyHp: 10
-  ShotDelay: 0
+  enemyHp: 3
+  shotDelay: 0
+  maxShotDelay: 2
   bulletPos: {fileID: 4080304621252727327}
   bulletObj: {fileID: 1652200204203127981, guid: 10c259fd5193e4941a84aca14fa701eb, type: 3}
+  player: {fileID: 7500214135229030213, guid: fa37d81f195c97148ab13e785187dd72, type: 3}
