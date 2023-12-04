@@ -12,8 +12,16 @@ public class PlayerCharacterContoller : MonoBehaviour
     public event Action OnAttackEvent;
 
     private float _timeSinceLastAttack = float.MaxValue;
+    public float reroad = 0.2f;
     protected bool IsAttacking { get; set; }
 
+
+    public PowerUpItem _PowerUpItem;
+
+    void Start()
+    {
+        _PowerUpItem.EatPowerUpItem += EatPowerUpItem;
+    }
     protected virtual void Update()
     {
         PlayerAttackDelay();
@@ -21,12 +29,12 @@ public class PlayerCharacterContoller : MonoBehaviour
 
     private void PlayerAttackDelay()
     {
-        if(_timeSinceLastAttack <= 0.2f)
+        if(_timeSinceLastAttack <= reroad)
         {
             _timeSinceLastAttack += Time.deltaTime;
         }
         
-        if (IsAttacking && _timeSinceLastAttack > 0.2f)
+        if (IsAttacking && _timeSinceLastAttack > reroad)
         {
             _timeSinceLastAttack = 0;
             CallAttackEvent();
@@ -40,5 +48,9 @@ public class PlayerCharacterContoller : MonoBehaviour
     public void CallAttackEvent()
     {
         OnAttackEvent?.Invoke();
+    }
+    private void EatPowerUpItem()
+    {
+        reroad *= -0.2f;
     }
 }
