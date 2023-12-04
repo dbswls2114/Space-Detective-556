@@ -160,10 +160,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: 1
   speed: 3
-  enemyHp: 10
-  ShotDelay: 0
+  enemyHp: 5
+  shotDelay: 0
+  maxShotDelay: 2
   bulletPos: {fileID: 1800830187753553453}
   bulletObj: {fileID: 8821196268633962860, guid: 35e5db1a06bb51145bf77b56e34fcec3, type: 3}
+  player: {fileID: 7500214135229030213, guid: fa37d81f195c97148ab13e785187dd72, type: 3}
 --- !u!60 &4235402855650809349
 PolygonCollider2D:
   m_ObjectHideFlags: 0
