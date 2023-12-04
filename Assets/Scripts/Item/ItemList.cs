@@ -21,6 +21,7 @@ public enum ItemType
     public abstract void ItemEffect();
     public abstract void SpawnItem();
 
+
     protected void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();

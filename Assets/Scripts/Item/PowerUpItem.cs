@@ -8,14 +8,16 @@ public class PowerUpItem : ItemList
     {
         name = "PowerUp";
         type = ItemType.PowerUp;
-        _rigidbody = this.GetComponent<Rigidbody>();
+       
     }
     public override void SpawnItem()
     {
-        throw new System.NotImplementedException();
+        Instantiate(this, transform);
     }
     public override void ItemEffect()
     {
-        throw new System.NotImplementedException();
+        //총알의 크기를 키우고(콜라이더도)
+        //재발사 대기시간도 줄이고
+        //만약 데미지가 있다면 데미지도 올린다.
     }
 }
