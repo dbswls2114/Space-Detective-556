@@ -32,6 +32,15 @@ public class PlayerCharacterContoller : MonoBehaviour
             CallAttackEvent();
         }
     }
+    
+    //피격처리
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Bullet")
+        {
+            Destroy(gameObject);
+        }
+    }
 
     public void CallMoveEvent(Vector2 direction)
     {
