@@ -1237,6 +1237,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StageBackground
       objectReference: {fileID: 0}
+    - target: {fileID: 9022403191500997631, guid: b4c44cc98ffea0c4cbb39a31530bc1de, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
