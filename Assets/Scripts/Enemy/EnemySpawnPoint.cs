@@ -30,6 +30,7 @@ public class EnemySpawnPoint : MonoBehaviour
         int ranPoint = Random.Range(0, spawnPoints.Length);
         //Enemy enemy = GetComponent<Enemy>();
         //enemy.player = player;
+
         Instantiate(enemys[randomEnemy], spawnPoints[ranPoint].position, spawnPoints[ranPoint].rotation);
     }
     
