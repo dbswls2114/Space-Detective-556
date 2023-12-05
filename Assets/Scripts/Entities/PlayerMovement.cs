@@ -9,11 +9,13 @@ public class PlayeriveMovement : MonoBehaviour
 
     private Vector2 _movementDirection = Vector2.zero;
     private Rigidbody2D _rigidbody;
+    Animator anim;
 
     private void Awake()
     {
         _controller = GetComponent<PlayerCharacterContoller>();
         _rigidbody = GetComponent<Rigidbody2D>();
+        anim = this.gameObject.transform.GetChild(0).GetComponent<Animator>();
     }
 
     private void Start()
@@ -30,9 +32,11 @@ public class PlayeriveMovement : MonoBehaviour
     {
         _movementDirection = direction;
     }
-
+    
     private void ApplyMovment(Vector2 direction)
     {
+        anim.SetInteger("Input", (int)direction.x);
+        
         direction = direction * 5;
 
         _rigidbody.velocity = direction;
