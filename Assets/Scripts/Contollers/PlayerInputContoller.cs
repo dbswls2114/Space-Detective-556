@@ -8,8 +8,7 @@ using UnityEngine.InputSystem;
 public class PlayerInputContoller : PlayerCharacterContoller
 
 {
-    private Camera _camera;
-    Animator anim;
+    private Camera _camera;    
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
 
@@ -21,8 +20,7 @@ public class PlayerInputContoller : PlayerCharacterContoller
 
         rigid = GetComponent<Rigidbody2D>();
         rigid.freezeRotation = true;
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        anim = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();        
     }
 
 
@@ -56,8 +54,7 @@ public class PlayerInputContoller : PlayerCharacterContoller
 //    Transform.position = curPos + nextPos;
 //}
 
-//if(Input.GetButtonDown("Horizontal") || Input.GetButtonUp("Horizontal"))
+//if (Input.GetButtonDown("Horizontal") || Input.GetButtonUp("Horizontal"))
 //{
 //    anim.GetInteger("Input", (int)h);
 //}
-    

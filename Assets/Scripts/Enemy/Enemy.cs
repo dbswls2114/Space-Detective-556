@@ -34,11 +34,13 @@ public class Enemy : MonoBehaviour
 
     Rigidbody2D rigidbody;
     SpriteRenderer spriteRenderer;
+    Animator anim;
 
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
     }
 
     void Start()
@@ -193,8 +195,11 @@ public class Enemy : MonoBehaviour
         enemyHp -= damage;
         if (enemyHp <= 0)
         {
-            //Enemy ав╢б anim
-            Destroy(this.gameObject);
+            anim.SetTrigger("OnExplosion");
+            Destroy(this.gameObject, 0.5f);
+            
         }
     }
+
+   
 }
