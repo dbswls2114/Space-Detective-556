@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     private int TotalScore; 
     private GameObject[] NumberOfEnemies;
     public static GameManager I;
+    public GameObject PowerUpItem;
     
     void Awake()
     {
@@ -36,7 +37,7 @@ public class GameManager : MonoBehaviour
     void Update(){ 
         NumberOfEnemies = GameObject.FindGameObjectsWithTag("Enemy"); 
         if(NumberOfEnemies.Length == 0){ //enemies가 0일때 
-            //다음 레벨로?? 아님 클리어?? 
+            //다음 레벨로?? 아님 클리어??             
         }
     }
     public void UpdateScore(int score){ //적을 잡을때마다 호출 
@@ -61,5 +62,11 @@ public class GameManager : MonoBehaviour
         float maxScore= PlayerPrefs.GetInt("bestscore");
         maxScoreTxt.text = maxScore.ToString();
     }
+
+    public void SpawnItem(Vector3 enemyPos)
+    {
+        Instantiate(PowerUpItem, enemyPos, Quaternion.identity);
+    }
+
 
 }
