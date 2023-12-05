@@ -17,10 +17,7 @@ public class Enemy : MonoBehaviour
     };
 
     public EnemyType enemyType;
-    //Vector2 pos;
-    //float delta = 2.0f;
-    //public int stage;
-    int damage;
+
     public float speed = 3.0f;
     public float enemyHp;
 
@@ -183,39 +180,21 @@ public class Enemy : MonoBehaviour
             maxShotDelay = Random.Range(3f, 4f);
         }
     }
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        if (other.gameObject.tag == "PlayerBullet")
+        if (collision.gameObject.tag == "PlayerBullet")
         {
-            Debug.Log("Bullet Hit!");
-            StartCoroutine(OnDamage());
-            //Destroy(other.gameObject);
+            OnHit(1);
         }
     }
-
-
-    IEnumerator OnDamage()
+    void OnHit (int damage)
     {
-        Debug.Log("OnDamage");
-        //enemyHp -= playerAttackDamage;
-        //MyMaterial.color = Color.red;
-        if (enemyHp > 0)
-        {
-            //Enemy Hit anim
-            //MyMaterial.color = new Color(1,1,1);
-        }
-
+        //hit ani
+        enemyHp -= damage;
         if (enemyHp <= 0)
         {
             //Enemy ав╢б anim
-            Disappearing();
+            Destroy(this.gameObject);
         }
-        yield return new WaitForSeconds(0.2f);
-    }
-
-    void Disappearing()
-    {
-        Debug.Log("Disappearing");
-        Destroy(this.gameObject);
     }
 }
