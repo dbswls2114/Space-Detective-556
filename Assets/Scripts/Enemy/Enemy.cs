@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
+using UnityEngine.UIElements;
 //using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class Enemy : MonoBehaviour
@@ -16,26 +17,23 @@ public class Enemy : MonoBehaviour
     };
 
     public EnemyType enemyType;
-    Vector2 pos;
-    float delta = 2.0f;
 
     public float speed = 3.0f;
     public float enemyHp;
 
-    public float ShotDelay;
-    float MaxShotDelay = 1.5f;
+    public float shotDelay;
+    public float maxShotDelay = 2f;
+
+    private float moveDelay;
+    private float maxMoveDelay = 2f;
 
     public Transform bulletPos;
     public GameObject bulletObj;
 
+    public GameObject player;
+
     Rigidbody2D rigidbody;
     SpriteRenderer spriteRenderer;
-
-
-    public float moveDelay;
-    public float maxMoveDelay;
-
-
 
     private void Awake()
     {
@@ -45,147 +43,158 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        pos = transform.position;
-        //StartCoroutine(ForceMove());
         Move();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        StartCoroutine(Attack());
+        EnemyAttack();
     }
 
-    IEnumerator ForceMove()
-    {
-        //pos += Vector2.down * 0.01f;
-        //int ranPointY = Random.Range(1, 5);
-        //int ranPointX = Random.Range(-2, 3);
-        //Vector2 ranVec = new Vector2(ranPointX, ranPointY);
-        //transform.DOMove(ranVec, 2);
-
-        int ranPointY = Random.Range(1, 5);
-        int ranPointX = Random.Range(-2, 3);
-        Vector2 pos = new Vector2(ranPointX, ranPointY);
-        transform.DOMove(pos, 2);
-
-        yield return null;
-    }
-
-    void MovementA()
-    {
-        //pos += Vector2.down * 0.01f;
-        int ranPointY = Random.Range(1, 5);
-        int ranPointX = Random.Range(-2, 3);
-        Vector2 ranVec = new Vector2(ranPointX, ranPointY);
-        transform.DOMove(ranVec, 2);
-        //transform.position = Vector3.Slerp(gameObject.transform.position, ranVec.transform.position, 0.05f);
-
-    }
     private void Move()
     {
         switch (enemyType)
         {
             case EnemyType.EnemyA:
-                //StartCoroutine(ForceMove());
-                MovementA();
-                    break;
+                StartCoroutine(MovementA1());
+                break;
             case EnemyType.EnemyB:
-                MovementB();
+                StartCoroutine(MovementB1());
                 break;
             case EnemyType.EnemyC:
-                MovementC();
+                //MovementC();
+                StartCoroutine(MovementC1());
                 break;
         }
     }
-    void MovementB()
+    
+    IEnumerator MovementA1()
     {
-        //float moveDelay;
-        //float maxMoveDelay;
-
-        moveDelay += Time.deltaTime;
-        if (moveDelay >= maxMoveDelay)
-        {
-            Debug.Log("MovementB");
-            float ranPointY = Random.Range(1, 5);
-            float ranPointX = Random.Range(-2, 3);
-            Vector2 pos = new Vector2(ranPointX, ranPointY);
-            transform.DOMove(pos, 2);
-            maxMoveDelay = Random.Range(2, 5);
-            moveDelay = 0;
-        }
-        //moveDelay += Time.deltaTime;
-        //if (moveDelay >= maxMoveDelay)
-        //{
-        //    int ranPointY = Random.Range(1, 5);
-        //    int ranPointX = Random.Range(-2, 3);
-        //    Vector2 pos = new Vector2(ranPointX, ranPointY);
-        //    transform.DOMove(pos, 2);
-        //    maxMoveDelay = Random.Range(2, 5);
-        //    moveDelay = 0;
-        //}
-        //Vector2 repeatMovement = pos;
-        //repeatMovement.x = Random.Range(1, 3);
-        //repeatMovement.y = Random.Range(-2, 2);
-        //Vector2 ranVec = new Vector2(repeatMovement.x, repeatMovement.y);
-        //transform.DOMove(ranVec, 2);
-    }
-
-    void MovementC()
-    {
-        pos += Vector2.down * 0.01f;
-
-    }
-
-
-
-    IEnumerator Attack()
-    {
-        ShotDelay += Time.deltaTime;
-        //Bullet 소환
-        if (ShotDelay >= MaxShotDelay)
-        {
-            //Debug.Log("Attack");
-            GameObject intantBullet = Instantiate(bulletObj, bulletPos.position, bulletPos.rotation);
-            Rigidbody2D bulletRigidbody = intantBullet.GetComponent<Rigidbody2D>();
-            bulletRigidbody.velocity = bulletPos.forward * 2;
-            bulletRigidbody.AddForce(Vector2.down * 10, ForceMode2D.Impulse);
-            ShotDelay = 0;
-        }
+        int ranPointY = Random.Range(1, 5);
+        int ranPointX = Random.Range(-2, 3);
+        Vector2 ranVec = new Vector2(ranPointX, ranPointY);
+        transform.DOMove(ranVec, 2);
         yield return null;
     }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.gameObject.tag == "Bullet")
-    //    {
-    //        Debug.Log("Bullet Hit!");
-    //        StartCoroutine(OnDamage());
-    //        Destroy(other.gameObject);
-    //    }
-    //}
+    IEnumerator MovementB1()
+    {
+        while (true)
+        {
+            float ranPointY = Random.Range(1f, 5f);
+            float ranPointX = Random.Range(-2.2f, 2.2f);
+            //Vector2 pos = new Vector2(ranPointX, ranPointY);
+            Vector2 randomPosition = new Vector2(ranPointX, ranPointY);
 
-    //IEnumerator OnDamage()
-    //{
-    //    Debug.Log("OnDamage");
-    //    //enemyHp -= damage;
-    //    //MyMaterial.color = Color.red;
-    //    if (enemyHp > 0)
-    //    {
-    //        //MyMaterial.color = new Color(1,1,1);
-    //    }
+            while (Vector2.Distance(transform.position, randomPosition) > 0.1f)
+            {
+                transform.DOMove(randomPosition, 3);
+                //transform.position = Vector2.MoveTowards(transform.position, randomPosition, speed * Time.deltaTime);
+                yield return null;
+            }
 
-    //    if ( enemyHp < 0)
-    //    {
-    //        StartCoroutine(Disappearing());
-    //    }
-    //    yield return new WaitForSeconds(0.2f);
-    //}
+            yield return new WaitForSeconds(maxMoveDelay);
+        }
+    }
+    
 
-    //IEnumerator Disappearing()
-    //{
-    //    Debug.Log("Disappearing");
-    //    Destroy(this.gameObject);
-    //    yield return null;
-    //}
+    IEnumerator MovementC1()
+    {
+        //int ranPointX = Random.Range(-2, 3);
+        float ranPointY = Random.Range(0f, 3f);
+        Vector2 randomPosition = new Vector2(transform.position.x, ranPointY);
+        transform.DOMove(randomPosition, 7);
+
+        yield return null;
+    }
+    private void EnemyAttack()
+    {
+        switch (enemyType)
+        {
+            case EnemyType.EnemyA:
+                AttackA();
+                break;
+            case EnemyType.EnemyB:
+                AttackB();
+                break;
+            case EnemyType.EnemyC:
+                AttackC();
+                break;
+        }
+    }
+    void AttackA()
+    {
+        shotDelay += Time.deltaTime;
+        if (shotDelay >= maxShotDelay)
+        {
+            GameObject instantBullet = Instantiate(bulletObj, bulletPos.position, bulletPos.rotation);
+            Rigidbody2D bulletRigidbody = instantBullet.GetComponent<Rigidbody2D>();
+            bulletRigidbody.velocity = bulletPos.forward * 2;
+            bulletRigidbody.AddForce(Vector2.down * 10, ForceMode2D.Impulse);
+            maxShotDelay = Random.Range(3f, 5f);
+            shotDelay = 0;
+        }
+    }
+
+    
+    void AttackB()
+    {
+        maxShotDelay = 2f;
+        shotDelay += Time.deltaTime;
+        if (shotDelay >= maxShotDelay)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                GameObject instantBullet = Instantiate(bulletObj, bulletPos.position, bulletPos.rotation);
+                instantBullet.transform.position = transform.position;
+                Vector2 bulletDir = Vector2.down;
+                bulletDir.x -= 0.3f;
+                bulletDir.x += 0.3f * i;
+                instantBullet.GetComponent<Rigidbody2D>().AddForce(bulletDir * 10, ForceMode2D.Impulse);
+            }
+            shotDelay = 0;
+            maxShotDelay = Random.Range(3f, 4f);
+        }
+    }
+
+    void AttackC()
+    {
+        maxShotDelay = 2f;
+        shotDelay += Time.deltaTime;
+
+        //Bullet 소환
+        if (shotDelay >= maxShotDelay)
+        {
+
+            GameObject instantBullet = Instantiate(bulletObj, bulletPos.position, bulletPos.rotation);
+            Rigidbody2D bulletRigidbody = instantBullet.GetComponent<Rigidbody2D>();
+            //bulletRigidbody.velocity = bulletPos.forward * 2;
+            bulletRigidbody.AddForce(Vector2.down * 10, ForceMode2D.Impulse);
+
+            //GameObject instantBullet = Instantiate(bulletObj, bulletPos.position, bulletPos.rotation);
+            //instantBullet.transform.position = transform.position;
+            ////Vector2 bulletDir = player.transform.position - transform.position;
+
+            //instantBullet.GetComponent<Rigidbody2D>().AddForce(bulletDir.normalized * 10, ForceMode2D.Impulse);
+            shotDelay = 0;
+            maxShotDelay = Random.Range(3f, 4f);
+        }
+    }
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "PlayerBullet")
+        {
+            OnHit(1);
+        }
+    }
+    void OnHit (int damage)
+    {
+        //hit ani
+        enemyHp -= damage;
+        if (enemyHp <= 0)
+        {
+            //Enemy 죽는 anim
+            Destroy(this.gameObject);
+        }
+    }
 }
