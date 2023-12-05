@@ -50,15 +50,15 @@ public class GameManager : MonoBehaviour
         isGameOver= true;
 
         if(PlayerPrefs.HasKey("bestscore") == false){
-            PlayerPrefs.SetFloat("bestscore", TotalScore);
+            PlayerPrefs.SetInt("bestscore", TotalScore);
         }else{
             if (TotalScore > PlayerPrefs.GetFloat("bestscore")){
-                PlayerPrefs.SetFloat("bestscore",TotalScore);
+                PlayerPrefs.SetInt("bestscore",TotalScore);
             }
         }
 
 
-        float maxScore= PlayerPrefs.GetFloat("bestscore");
+        float maxScore= PlayerPrefs.GetInt("bestscore");
         maxScoreTxt.text = maxScore.ToString();
     }
 
