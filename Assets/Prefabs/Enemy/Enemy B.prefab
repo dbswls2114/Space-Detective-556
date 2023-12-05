@@ -108,7 +108,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 51
   m_Sprite: {fileID: -1147401495359466748, guid: 138040323294fd440a3a823e5d70ad01, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -167,6 +167,7 @@ MonoBehaviour:
   bulletPos: {fileID: 5874419006996455282}
   bulletObj: {fileID: 8821196268633962860, guid: 35e5db1a06bb51145bf77b56e34fcec3, type: 3}
   player: {fileID: 7500214135229030213, guid: fa37d81f195c97148ab13e785187dd72, type: 3}
+  Target: {fileID: 0}
 --- !u!60 &2307366949699224484
 PolygonCollider2D:
   m_ObjectHideFlags: 0

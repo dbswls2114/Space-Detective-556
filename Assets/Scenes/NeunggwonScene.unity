@@ -1024,6 +1024,7 @@ MonoBehaviour:
   isGameOver: 0
   scoreTxt: {fileID: 94728144}
   maxScoreTxt: {fileID: 0}
+  PowerUpItem: {fileID: 0}
 --- !u!4 &1649344794
 Transform:
   m_ObjectHideFlags: 0
