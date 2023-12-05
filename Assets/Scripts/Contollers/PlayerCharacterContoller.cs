@@ -36,9 +36,10 @@ public class PlayerCharacterContoller : MonoBehaviour
     //피격처리
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Bullet")
+        if (collision.gameObject.tag == "EnemyBullet")
         {
-            Destroy(gameObject);
+            Debug.Log("Player Hit");
+            // Destroy(gameObject);
         }
     }
 
