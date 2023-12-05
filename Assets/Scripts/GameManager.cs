@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     private int TotalScore; 
     private GameObject[] NumberOfEnemies;
     public static GameManager I;
+    
     void Awake()
     {
         I = this;

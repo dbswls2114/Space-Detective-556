@@ -11,6 +11,7 @@ public class PlayerInputContoller : PlayerCharacterContoller
     private Camera _camera;    
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
+    Animator anim;
 
 
 
