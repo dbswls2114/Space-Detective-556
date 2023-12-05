@@ -30,17 +30,26 @@ public class Enemy : MonoBehaviour
     public Transform bulletPos;
     public GameObject bulletObj;
 
-    public GameObject player;
+    //public GameObject player;
 
     Rigidbody2D rigidbody;
     SpriteRenderer spriteRenderer;
     Animator anim;
+    BoxCollider2D boxCollider;
+    CircleCollider2D circleCollider;
+    PolygonCollider2D polygonCollider;
 
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+
+
+        boxCollider = GetComponent<BoxCollider2D>();
+        circleCollider = GetComponent<CircleCollider2D>();
+        polygonCollider = GetComponent<PolygonCollider2D>();
+
     }
 
     void Start()
@@ -64,7 +73,6 @@ public class Enemy : MonoBehaviour
                 StartCoroutine(MovementB1());
                 break;
             case EnemyType.EnemyC:
-                //MovementC();
                 StartCoroutine(MovementC1());
                 break;
         }
@@ -175,7 +183,7 @@ public class Enemy : MonoBehaviour
 
             //GameObject instantBullet = Instantiate(bulletObj, bulletPos.position, bulletPos.rotation);
             //instantBullet.transform.position = transform.position;
-            ////Vector2 bulletDir = player.transform.position - transform.position;
+            //Vector2 bulletDir = player.transform.position - transform.position;
 
             //instantBullet.GetComponent<Rigidbody2D>().AddForce(bulletDir.normalized * 10, ForceMode2D.Impulse);
             shotDelay = 0;
@@ -196,8 +204,19 @@ public class Enemy : MonoBehaviour
         if (enemyHp <= 0)
         {
             anim.SetTrigger("OnExplosion");
-            Destroy(this.gameObject, 0.5f);
-            
+            Destroy(this.gameObject,0.5f);
+            switch (enemyType)
+            {
+                case EnemyType.EnemyA:
+                    circleCollider.enabled = false;
+                    break;
+                case EnemyType.EnemyB:
+                    polygonCollider.enabled = false;
+                    break;
+                case EnemyType.EnemyC:
+                    boxCollider.enabled = false;
+                    break;
+            }
         }
     }
 
