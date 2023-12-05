@@ -10,17 +10,17 @@ public class PlayerCharacterContoller : MonoBehaviour
 {
     public event Action<Vector2> OnMoveEvent;
     public event Action OnAttackEvent;
+    public event Action EatItem;
+
 
     private float _timeSinceLastAttack = float.MaxValue;
     public float reroad = 0.2f;
     protected bool IsAttacking { get; set; }
 
 
-    public PowerUpItem _PowerUpItem;
-
     void Start()
     {
-        _PowerUpItem.EatPowerUpItem += EatPowerUpItem;
+        EatItem += EatPowerUpItem;
     }
     protected virtual void Update()
     {
@@ -49,6 +49,11 @@ public class PlayerCharacterContoller : MonoBehaviour
             Debug.Log("Player Hit");
             // Destroy(gameObject);
         }
+        if(collision.gameObject.tag == "PowerUpItem")
+        {
+            EatItem?.Invoke();
+            Destroy(collision.gameObject);
+        }
     }
 
     public void CallMoveEvent(Vector2 direction)
@@ -61,6 +66,6 @@ public class PlayerCharacterContoller : MonoBehaviour
     }
     private void EatPowerUpItem()
     {
-        reroad *= -0.2f;
+        reroad *= 0.9f;
     }
 }

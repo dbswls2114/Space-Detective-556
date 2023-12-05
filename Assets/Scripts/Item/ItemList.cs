@@ -11,15 +11,15 @@ public enum ItemType
 
  public abstract class ItemList : MonoBehaviour
 {
-    public new string name;
+    public string itemName;
     public ItemType type;
     public float maxSizeX = 2.8f; // 카메라 범위
     public float maxSizeY = 5f; // 카메라 범위
     public Rigidbody2D _rigidbody;
 
     public float speed = 10f; //임시
-    public abstract void ItemEffect();
-    public abstract void SpawnItem();
+    public abstract void ItemEffect(); //안씀
+    public abstract void SpawnItem(); //안씀
 
     protected virtual void Start()
     {
@@ -28,9 +28,10 @@ public enum ItemType
 
     protected void FixedUpdate()
     {
-        Move();
+        //Move();
     }
 
+    /* 아이템이 드랍되면 움직이게 하는부분
     protected void Move()
     {
         _rigidbody.AddForce(transform.forward * -speed, ForceMode2D.Force);
@@ -42,4 +43,5 @@ public enum ItemType
 
         }
     }
+    */
 }

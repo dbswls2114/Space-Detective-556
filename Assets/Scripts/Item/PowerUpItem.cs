@@ -8,14 +8,14 @@ public class PowerUpItem : ItemList
     public event Action EatPowerUpItem;
     protected override void Start()
     {
-        name = "PowerUp";
+        itemName = "PowerUp";
         type = ItemType.PowerUp;
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
     public override void SpawnItem()
     {
-        Instantiate(this, transform);
+        //Instantiate(this, transform);
     }
     public override void ItemEffect()
     {
@@ -26,7 +26,5 @@ public class PowerUpItem : ItemList
     public void CallEatPowerUpItem()
     {
         EatPowerUpItem?.Invoke();
-        //플레이어 움직임 코드 어딘가에 이 아이템을 먹었을때 호출하게 짜야댐 어디다 짜지
-        // 충돌처리 부분이 완료되면 넣으면 될듯
     }
 }

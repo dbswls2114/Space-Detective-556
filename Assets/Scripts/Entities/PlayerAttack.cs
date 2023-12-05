@@ -11,7 +11,6 @@ public class PlayerAttack : MonoBehaviour
     public GameObject bulletA;
     public Vector3 bulletScale = Vector3.one;
 
-    private PowerUpItem PowerUpItem;
 
     private void Awake()
     {
@@ -20,7 +19,7 @@ public class PlayerAttack : MonoBehaviour
     void Start()
     {
         _contoller.OnAttackEvent += OnShoot;
-        PowerUpItem.EatPowerUpItem += EatPowerUpItem;
+        _contoller.EatItem += EatPowerUpItem;
     }
     private void OnShoot()
     {

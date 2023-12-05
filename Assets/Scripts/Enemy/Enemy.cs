@@ -5,6 +5,7 @@ using UnityEngine;
 using DG.Tweening;
 using TMPro;
 using UnityEngine.UIElements;
+using System;
 //using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class Enemy : MonoBehaviour
@@ -35,6 +36,8 @@ public class Enemy : MonoBehaviour
     Rigidbody2D rigidbody;
     SpriteRenderer spriteRenderer;
     Animator anim;
+
+    public event Action<Vector3> DieEnemyEvent; 
 
     private void Awake()
     {
@@ -72,8 +75,8 @@ public class Enemy : MonoBehaviour
     
     IEnumerator MovementA1()
     {
-        int ranPointY = Random.Range(1, 5);
-        int ranPointX = Random.Range(-2, 3);
+        int ranPointY = UnityEngine.Random.Range(1, 5);
+        int ranPointX = UnityEngine.Random.Range(-2, 3);
         Vector2 ranVec = new Vector2(ranPointX, ranPointY);
         transform.DOMove(ranVec, 2);
         yield return null;
@@ -83,8 +86,8 @@ public class Enemy : MonoBehaviour
     {
         while (true)
         {
-            float ranPointY = Random.Range(1f, 5f);
-            float ranPointX = Random.Range(-2.2f, 2.2f);
+            float ranPointY = UnityEngine.Random.Range(1f, 5f);
+            float ranPointX = UnityEngine.Random.Range(-2.2f, 2.2f);
             //Vector2 pos = new Vector2(ranPointX, ranPointY);
             Vector2 randomPosition = new Vector2(ranPointX, ranPointY);
 
@@ -103,7 +106,7 @@ public class Enemy : MonoBehaviour
     IEnumerator MovementC1()
     {
         //int ranPointX = Random.Range(-2, 3);
-        float ranPointY = Random.Range(0f, 3f);
+        float ranPointY = UnityEngine.Random.Range(0f, 3f);
         Vector2 randomPosition = new Vector2(transform.position.x, ranPointY);
         transform.DOMove(randomPosition, 7);
 
@@ -133,7 +136,7 @@ public class Enemy : MonoBehaviour
             Rigidbody2D bulletRigidbody = instantBullet.GetComponent<Rigidbody2D>();
             bulletRigidbody.velocity = bulletPos.forward * 2;
             bulletRigidbody.AddForce(Vector2.down * 10, ForceMode2D.Impulse);
-            maxShotDelay = Random.Range(3f, 5f);
+            maxShotDelay = UnityEngine.Random.Range(3f, 5f);
             shotDelay = 0;
         }
     }
@@ -155,7 +158,7 @@ public class Enemy : MonoBehaviour
                 instantBullet.GetComponent<Rigidbody2D>().AddForce(bulletDir * 10, ForceMode2D.Impulse);
             }
             shotDelay = 0;
-            maxShotDelay = Random.Range(3f, 4f);
+            maxShotDelay = UnityEngine.Random.Range(3f, 4f);
         }
     }
 
@@ -179,7 +182,7 @@ public class Enemy : MonoBehaviour
 
             //instantBullet.GetComponent<Rigidbody2D>().AddForce(bulletDir.normalized * 10, ForceMode2D.Impulse);
             shotDelay = 0;
-            maxShotDelay = Random.Range(3f, 4f);
+            maxShotDelay = UnityEngine.Random.Range(3f, 4f);
         }
     }
     void OnTriggerEnter2D(Collider2D collision)
@@ -196,10 +199,9 @@ public class Enemy : MonoBehaviour
         if (enemyHp <= 0)
         {
             anim.SetTrigger("OnExplosion");
+            DieEnemyEvent?.Invoke(this.gameObject.transform.position);
             Destroy(this.gameObject, 0.5f);
             
         }
     }
-
-   
 }

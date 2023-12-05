@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2533131905666674932}
   - component: {fileID: 2959387297336370720}
-  - component: {fileID: 5476250230205482446}
   - component: {fileID: 5655691749213056602}
   m_Layer: 0
   m_Name: MainSprite
@@ -86,18 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5476250230205482446
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3581416003864007727}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b6d5e9d034dd4447870075e1a978782, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &5655691749213056602
 Animator:
   serializedVersion: 5
@@ -157,7 +144,7 @@ Transform:
   - {fileID: 2533131905666674932}
   - {fileID: 5119691291433652996}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1266298246789820548
 Rigidbody2D:
@@ -273,6 +260,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d609c12448eaef478b30c58dbe29e15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reroad: 0.2
+  _PowerUpItem: {fileID: 0}
 --- !u!114 &7956431910454310463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,6 +288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileSpawnPosition: {fileID: 5119691291433652996}
   bulletA: {fileID: 3171822735559975390, guid: e8307eb54785068459ceaf940c629227, type: 3}
+  bulletScale: {x: 1, y: 1, z: 1}
 --- !u!114 &3566454621555085552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -311,6 +301,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b6d5e9d034dd4447870075e1a978782, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reroad: 0.2
+  _PowerUpItem: {fileID: 0}
 --- !u!1 &8089399297628528865
 GameObject:
   m_ObjectHideFlags: 0
