@@ -12,6 +12,7 @@ TagManager:
   - EnemyBulletA
   - EnemyBulletB
   - EnemyBulletC
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX

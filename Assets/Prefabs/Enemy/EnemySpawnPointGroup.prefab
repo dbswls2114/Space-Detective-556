@@ -33,7 +33,7 @@ Transform:
   - {fileID: 3552806179211329120}
   - {fileID: 4763627224270597433}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1330082494650746144
 MonoBehaviour:
@@ -50,12 +50,13 @@ MonoBehaviour:
   enemys:
   - {fileID: 4917711592160642965, guid: 593f25badb9a4a049983ab34e1c0a3c3, type: 3}
   - {fileID: 8229510152302150217, guid: 8be595cdb90fcc04fb750d198af153fc, type: 3}
+  - {fileID: 7199942160989219280, guid: 2255d04d8e2680449a25707501490484, type: 3}
   spawnPoints:
   - {fileID: 2147845567895594732}
   - {fileID: 3552806179211329120}
   - {fileID: 4763627224270597433}
   spawnDelay: 0
-  maxSpawnDelay: 1.6
+  maxSpawnDelay: 3
 --- !u!1 &2206629071431062576
 GameObject:
   m_ObjectHideFlags: 0
