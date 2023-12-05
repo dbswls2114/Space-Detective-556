@@ -212,12 +212,15 @@ public class Enemy : MonoBehaviour
             switch (enemyType)
             {
                 case EnemyType.EnemyA:
+                    GameManager.I.UpdateScore(10);
                     circleCollider.enabled = false;
                     break;
                 case EnemyType.EnemyB:
+                    GameManager.I.UpdateScore(50);
                     polygonCollider.enabled = false;
                     break;
                 case EnemyType.EnemyC:
+                    GameManager.I.UpdateScore(100);
                     boxCollider.enabled = false;
                     break;
             }
