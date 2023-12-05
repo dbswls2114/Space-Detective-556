@@ -48,6 +48,18 @@ public class GameManager : MonoBehaviour
         retryBtn.SetActive(true);
         Time.timeScale = 0.0f;
         isGameOver= true;
+
+        if(PlayerPrefs.HasKey("bestscore") == false){
+            PlayerPrefs.SetFloat("bestscore", TotalScore);
+        }else{
+            if (TotalScore > PlayerPrefs.GetFloat("bestscore")){
+                PlayerPrefs.SetFloat("bestscore",TotalScore);
+            }
+        }
+
+
+        float maxScore= PlayerPrefs.GetFloat("bestscore");
+        maxScoreTxt.text = maxScore.ToString();
     }
 
 }
