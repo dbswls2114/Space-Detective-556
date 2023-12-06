@@ -6,7 +6,6 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine.UIElements;
 using System;
-using Unity.Mathematics;
 //using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class Enemy : MonoBehaviour
@@ -66,23 +65,23 @@ public class Enemy : MonoBehaviour
         EnemyAttack();
     }
 
-    private void Move() 
+    private void Move()
     {
         switch (enemyType)
         {
             case EnemyType.EnemyA:
-                StartCoroutine(MovementA1());
+                StartCoroutine(MovementA());
                 break;
             case EnemyType.EnemyB:
-                StartCoroutine(MovementB1());
+                StartCoroutine(MovementB());
                 break;
             case EnemyType.EnemyC:
-                StartCoroutine(MovementC1());
+                StartCoroutine(MovementC());
                 break;
         }
     }
     
-    IEnumerator MovementA1()
+    IEnumerator MovementA()
     {
         int ranPointY = UnityEngine.Random.Range(1, 5);
         int ranPointX = UnityEngine.Random.Range(-2, 3);
@@ -91,19 +90,17 @@ public class Enemy : MonoBehaviour
         yield return null;
     }
 
-    IEnumerator MovementB1()
+    IEnumerator MovementB()
     {
         while (true)
         {
             float ranPointY = UnityEngine.Random.Range(1f, 5f);
             float ranPointX = UnityEngine.Random.Range(-2.2f, 2.2f);
-            //Vector2 pos = new Vector2(ranPointX, ranPointY);
             Vector2 randomPosition = new Vector2(ranPointX, ranPointY);
 
             while (Vector2.Distance(transform.position, randomPosition) > 0.1f)
             {
                 transform.DOMove(randomPosition, 3);
-                //transform.position = Vector2.MoveTowards(transform.position, randomPosition, speed * Time.deltaTime);
                 yield return null;
             }
 
@@ -112,9 +109,8 @@ public class Enemy : MonoBehaviour
     }
     
 
-    IEnumerator MovementC1()
+    IEnumerator MovementC()
     {
-        //int ranPointX = Random.Range(-2, 3);
         float ranPointY = UnityEngine.Random.Range(0f, 3f);
         Vector2 randomPosition = new Vector2(transform.position.x, ranPointY);
         transform.DOMove(randomPosition, 7);
@@ -175,21 +171,24 @@ public class Enemy : MonoBehaviour
     {
         maxShotDelay = 2f;
         shotDelay += Time.deltaTime;
-        //Bullet ¼ÒÈ¯
+
         if (shotDelay >= maxShotDelay)
         {
-            //GameObject instantBullet = Instantiate(bulletObj, bulletPos.position, bulletPos.rotation);
-            //Rigidbody2D bulletRigidbody = instantBullet.GetComponent<Rigidbody2D>();
-            ////bulletRigidbody.velocity = bulletPos.forward * 2;
-            //bulletRigidbody.AddForce(Vector2.down * 10, ForceMode2D.Impulse);
-            
-            GameObject instantBullet = Instantiate(bulletObj, bulletPos.position, bulletPos.rotation);
-            instantBullet.transform.position = transform.position;
-            Vector2 bulletDir = player.transform.position - transform.position;
+            if (player != null)
+            {
+                GameObject instantBullet = Instantiate(bulletObj, bulletPos.position, bulletPos.rotation);
+                instantBullet.transform.position = transform.position;
+                Vector2 bulletDir = player.transform.position - transform.position;
 
-            instantBullet.GetComponent<Rigidbody2D>().AddForce(bulletDir.normalized * 10, ForceMode2D.Impulse);
-            shotDelay = 0;
-            maxShotDelay = UnityEngine.Random.Range(3f, 4f);
+                instantBullet.GetComponent<Rigidbody2D>().AddForce(bulletDir.normalized * 10, ForceMode2D.Impulse);
+                shotDelay = 0;
+                maxShotDelay = UnityEngine.Random.Range(3f, 4f);
+            }
+            else
+            {
+                player = GameObject.FindWithTag("Player");
+            }
+
         }
     }
     void OnTriggerEnter2D(Collider2D collision)
@@ -205,11 +204,7 @@ public class Enemy : MonoBehaviour
         if (enemyHp <= 0)
         {
             anim.SetTrigger("OnExplosion");
-            int Sran = UnityEngine.Random.Range(0, 10);
-            if(Sran == 0)
-            {
-                GameManager.I.SpawnItem(this.transform.position);
-            }           
+            DieEnemyEvent?.Invoke(this.gameObject.transform.position);
             Destroy(this.gameObject,0.5f);
 
             switch (enemyType)
