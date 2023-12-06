@@ -21,11 +21,18 @@ public enum ItemType
     public abstract void ItemEffect(); //¾È¾¸
     public abstract void SpawnItem(); //¾È¾¸
 
-    public Vector2 move = new Vector2(1, 1);
+    private Vector2 move = new Vector2(1, -1);
+
+    private void Awake()
+    {
+        _rigidbody = GetComponent<Rigidbody2D>();
+        int spawnVectorX = Random.Range(-1, 1);
+        move.x = spawnVectorX;
+    }
 
     protected virtual void Start()
     {
-        _rigidbody = GetComponent<Rigidbody2D>();
+        
         
     }
 
