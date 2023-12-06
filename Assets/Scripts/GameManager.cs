@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
 
         TotalScore = 0;
         Time.timeScale= 1.0f;
-        //GameOver();
+        GameOver();
         UpdateScore(0); //점수 초기화 
 
     }
