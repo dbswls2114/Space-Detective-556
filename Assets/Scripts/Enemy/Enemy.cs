@@ -6,6 +6,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine.UIElements;
 using System;
+using Unity.Mathematics;
 //using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class Enemy : MonoBehaviour
@@ -65,7 +66,7 @@ public class Enemy : MonoBehaviour
         EnemyAttack();
     }
 
-    private void Move()
+    private void Move() 
     {
         switch (enemyType)
         {
@@ -207,7 +208,11 @@ public class Enemy : MonoBehaviour
         if (enemyHp <= 0)
         {
             anim.SetTrigger("OnExplosion");
-            DieEnemyEvent?.Invoke(this.gameObject.transform.position);
+            int Sran = UnityEngine.Random.Range(0, 10);
+            if(Sran == 0)
+            {
+                GameManager.I.SpawnItem(this.transform.position);
+            }           
             Destroy(this.gameObject,0.5f);
 
             switch (enemyType)

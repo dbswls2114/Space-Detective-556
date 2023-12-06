@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
         TotalScore = 0;
         //GameOver();
         UpdateScore(0); //점수 초기화 
-        //enmey.DieEnemyEvent += UpdateScore;
+
     }
     
     void Update(){ 
