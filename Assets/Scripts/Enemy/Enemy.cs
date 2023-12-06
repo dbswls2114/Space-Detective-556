@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
     public Transform bulletPos;
     public GameObject bulletObj;
 
-    //public GameObject player;
+    public GameObject player;
 
     public Transform Target;
 
