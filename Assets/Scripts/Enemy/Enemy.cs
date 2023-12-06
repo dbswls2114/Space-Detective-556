@@ -140,16 +140,15 @@ public class Enemy : MonoBehaviour
             GameObject instantBullet = Instantiate(bulletObj, bulletPos.position, bulletPos.rotation);
             Rigidbody2D bulletRigidbody = instantBullet.GetComponent<Rigidbody2D>();
             bulletRigidbody.velocity = bulletPos.forward * 2;
-            bulletRigidbody.AddForce(Vector2.down * 5, ForceMode2D.Impulse);
-            maxShotDelay = UnityEngine.Random.Range(3f, 5f);
+            bulletRigidbody.AddForce(Vector2.down.normalized * 5, ForceMode2D.Impulse);
             shotDelay = 0;
+            maxShotDelay = UnityEngine.Random.Range(3f, 5f);
         }
     }
 
     
     void AttackB()
     {
-        maxShotDelay = 2f;
         shotDelay += Time.deltaTime;
         if (shotDelay >= maxShotDelay)
         {
@@ -160,7 +159,7 @@ public class Enemy : MonoBehaviour
                 Vector2 bulletDir = Vector2.down;
                 bulletDir.x -= 0.3f;
                 bulletDir.x += 0.3f * i;
-                instantBullet.GetComponent<Rigidbody2D>().AddForce(bulletDir * 5, ForceMode2D.Impulse);
+                instantBullet.GetComponent<Rigidbody2D>().AddForce(bulletDir.normalized * 3, ForceMode2D.Impulse);
             }
             shotDelay = 0;
             maxShotDelay = UnityEngine.Random.Range(3f, 4f);
@@ -169,7 +168,6 @@ public class Enemy : MonoBehaviour
 
     void AttackC()
     {
-        maxShotDelay = 2f;
         shotDelay += Time.deltaTime;
         if (shotDelay >= maxShotDelay)
         {
@@ -178,8 +176,7 @@ public class Enemy : MonoBehaviour
                 GameObject instantBullet = Instantiate(bulletObj, bulletPos.position, bulletPos.rotation);
                 instantBullet.transform.position = transform.position;
                 Vector2 bulletDir = player.transform.position - transform.position;
-
-                instantBullet.GetComponent<Rigidbody2D>().AddForce(bulletDir.normalized * 5, ForceMode2D.Impulse);
+                instantBullet.GetComponent<Rigidbody2D>().AddForce(bulletDir.normalized * 2, ForceMode2D.Impulse);
                 shotDelay = 0;
                 maxShotDelay = UnityEngine.Random.Range(3f, 4f);
             }
@@ -218,17 +215,20 @@ public class Enemy : MonoBehaviour
             switch (enemyType)
             {
                 case EnemyType.EnemyA:
+                    shotDelay = 0;
                     GameManager.I.UpdateScore(10);
                     transform.localScale = Vector3.one * 0.7f;
                     
                     circleCollider.enabled = false;
                     break;
                 case EnemyType.EnemyB:
+                    shotDelay = 0;
                     GameManager.I.UpdateScore(50);
                     transform.localScale = Vector3.one * 1f;
                     polygonCollider.enabled = false;
                     break;
                 case EnemyType.EnemyC:
+                    shotDelay = 0;
                     GameManager.I.UpdateScore(100);
                     transform.localScale = Vector3.one * 2f;
                     boxCollider.enabled = false;

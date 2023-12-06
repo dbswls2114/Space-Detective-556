@@ -92,8 +92,8 @@ Transform:
   m_GameObject: {fileID: 7913242461489923121}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3132944258711286691}
   - {fileID: 4761487285984257135}
@@ -243,9 +243,8 @@ MonoBehaviour:
   shotDelay: 0
   maxShotDelay: 2
   bulletPos: {fileID: 2492805028199856035}
-  bulletObj: {fileID: 4811004086644146273, guid: 04d2ec53bcba7c64c951e3dc67d0603f, type: 3}
+  bulletObj: {fileID: 6298004159072514373, guid: 8d8e5bbe4d284e045a8ece0d98d47473, type: 3}
   player: {fileID: 0}
-  Target: {fileID: 0}
 --- !u!95 &1569860858549697936
 Animator:
   serializedVersion: 5

@@ -40,7 +40,9 @@ public class GameManager : MonoBehaviour
     void Start()
     {        
         isGameOver= false;
-        TotalScore = 0;
+        //TotalScore = 0;
+        //테스트를 하기위해 주석 처리함
+        //Eidit->Clear All PlayerPrefs 을 하면 저장된 값을 초기화 시켜줌
         Time.timeScale= 1.0f;
         UpdateScore(0); //점수 초기화 
 

@@ -30,8 +30,8 @@ Transform:
   m_GameObject: {fileID: 1436041667860561116}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8460007316368200685}
   m_Father: {fileID: 0}
@@ -171,7 +171,6 @@ MonoBehaviour:
   bulletPos: {fileID: 8460007316368200685}
   bulletObj: {fileID: 1652200204203127981, guid: 10c259fd5193e4941a84aca14fa701eb, type: 3}
   player: {fileID: 7500214135229030213, guid: fa37d81f195c97148ab13e785187dd72, type: 3}
-  Target: {fileID: 0}
 --- !u!95 &3129260998679173256
 Animator:
   serializedVersion: 5

@@ -61,8 +61,8 @@ Transform:
   m_GameObject: {fileID: 7512718626426861765}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: -10, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5874419006996455282}
   m_Father: {fileID: 0}
@@ -167,7 +167,6 @@ MonoBehaviour:
   bulletPos: {fileID: 5874419006996455282}
   bulletObj: {fileID: 8821196268633962860, guid: 35e5db1a06bb51145bf77b56e34fcec3, type: 3}
   player: {fileID: 7500214135229030213, guid: fa37d81f195c97148ab13e785187dd72, type: 3}
-  Target: {fileID: 0}
 --- !u!60 &2307366949699224484
 PolygonCollider2D:
   m_ObjectHideFlags: 0

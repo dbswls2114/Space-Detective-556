@@ -18,12 +18,10 @@ public class EnemyBullet : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-
             Destroy(gameObject);
         }
         else if (collision.gameObject.tag == "Wall")
         {
-
             Destroy(gameObject);
         }
     }
