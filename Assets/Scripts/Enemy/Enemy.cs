@@ -6,6 +6,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine.UIElements;
 using System;
+using Unity.Mathematics;
 //using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class Enemy : MonoBehaviour
@@ -33,6 +34,8 @@ public class Enemy : MonoBehaviour
 
     //public GameObject player;
 
+    public Transform Target;
+
     Rigidbody2D rigidbody;
     SpriteRenderer spriteRenderer;
     Animator anim;
@@ -48,11 +51,11 @@ public class Enemy : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
 
-
         boxCollider = GetComponent<BoxCollider2D>();
         circleCollider = GetComponent<CircleCollider2D>();
         polygonCollider = GetComponent<PolygonCollider2D>();
 
+        player = GameObject.FindWithTag("Player");
     }
 
     void Start()
@@ -65,7 +68,7 @@ public class Enemy : MonoBehaviour
         EnemyAttack();
     }
 
-    private void Move()
+    private void Move() 
     {
         switch (enemyType)
         {
@@ -174,21 +177,19 @@ public class Enemy : MonoBehaviour
     {
         maxShotDelay = 2f;
         shotDelay += Time.deltaTime;
-
-        //Bullet ¼ÒÈ¯
+        //Bullet ï¿½ï¿½È¯
         if (shotDelay >= maxShotDelay)
         {
-
-            GameObject instantBullet = Instantiate(bulletObj, bulletPos.position, bulletPos.rotation);
-            Rigidbody2D bulletRigidbody = instantBullet.GetComponent<Rigidbody2D>();
-            //bulletRigidbody.velocity = bulletPos.forward * 2;
-            bulletRigidbody.AddForce(Vector2.down * 10, ForceMode2D.Impulse);
-
             //GameObject instantBullet = Instantiate(bulletObj, bulletPos.position, bulletPos.rotation);
-            //instantBullet.transform.position = transform.position;
-            //Vector2 bulletDir = player.transform.position - transform.position;
+            //Rigidbody2D bulletRigidbody = instantBullet.GetComponent<Rigidbody2D>();
+            ////bulletRigidbody.velocity = bulletPos.forward * 2;
+            //bulletRigidbody.AddForce(Vector2.down * 10, ForceMode2D.Impulse);
+            
+            GameObject instantBullet = Instantiate(bulletObj, bulletPos.position, bulletPos.rotation);
+            instantBullet.transform.position = transform.position;
+            Vector2 bulletDir = player.transform.position - transform.position;
 
-            //instantBullet.GetComponent<Rigidbody2D>().AddForce(bulletDir.normalized * 10, ForceMode2D.Impulse);
+            instantBullet.GetComponent<Rigidbody2D>().AddForce(bulletDir.normalized * 10, ForceMode2D.Impulse);
             shotDelay = 0;
             maxShotDelay = UnityEngine.Random.Range(3f, 4f);
         }
@@ -202,23 +203,29 @@ public class Enemy : MonoBehaviour
     }
     void OnHit (int damage)
     {
-        //hit ani
         enemyHp -= damage;
         if (enemyHp <= 0)
         {
             anim.SetTrigger("OnExplosion");
-            DieEnemyEvent?.Invoke(this.gameObject.transform.position);
+            int Sran = UnityEngine.Random.Range(0, 10);
+            if(Sran == 0)
+            {
+                GameManager.I.SpawnItem(this.transform.position);
+            }           
             Destroy(this.gameObject,0.5f);
 
             switch (enemyType)
             {
                 case EnemyType.EnemyA:
+                    GameManager.I.UpdateScore(10);
                     circleCollider.enabled = false;
                     break;
                 case EnemyType.EnemyB:
+                    GameManager.I.UpdateScore(50);
                     polygonCollider.enabled = false;
                     break;
                 case EnemyType.EnemyC:
+                    GameManager.I.UpdateScore(100);
                     boxCollider.enabled = false;
                     break;
             }

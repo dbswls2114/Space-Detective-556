@@ -44,7 +44,7 @@ public class PlayerCharacterContoller : MonoBehaviour
         }
     }
 
-    //ÇÇ°ÝÃ³¸®
+    //ï¿½Ç°ï¿½Ã³ï¿½ï¿½
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "EnemyBullet")
@@ -61,9 +61,14 @@ public class PlayerCharacterContoller : MonoBehaviour
             {
                 GameManager.I.PlayerRespawn();
             }
-            //Á×À» ¶§ ¾Ö´Ï¸ÞÀÌ¼Ç
+            //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½
         }
         if (collision.gameObject.tag == "PowerUpItem")
+        {
+            EatItem?.Invoke();
+            Destroy(collision.gameObject);
+        }
+        if(collision.gameObject.tag == "PowerUpItem")
         {
             EatItem?.Invoke();
             Destroy(collision.gameObject);

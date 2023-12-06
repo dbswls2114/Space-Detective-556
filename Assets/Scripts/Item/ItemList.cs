@@ -13,35 +13,45 @@ public enum ItemType
 {
     public string itemName;
     public ItemType type;
-    public float maxSizeX = 2.8f; // Ä«¸Þ¶ó ¹üÀ§
-    public float maxSizeY = 5f; // Ä«¸Þ¶ó ¹üÀ§
+    public float maxSizeX = 2.8f; // Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public float maxSizeY = 5f; // Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ï¿½ï¿½
     public Rigidbody2D _rigidbody;
 
-    public float speed = 10f; //ÀÓ½Ã
-    public abstract void ItemEffect(); //¾È¾¸
-    public abstract void SpawnItem(); //¾È¾¸
+    public float speed = 1f; //ï¿½Ó½ï¿½
+    public abstract void ItemEffect(); //ï¿½È¾ï¿½
+    public abstract void SpawnItem(); //ï¿½È¾ï¿½
+
+    private Vector2 move = new Vector2(1, -1);
+
+    private void Awake()
+    {
+        _rigidbody = GetComponent<Rigidbody2D>();
+        int spawnVectorX = Random.Range(-1, 1);
+        move.x = spawnVectorX;
+    }
 
     protected virtual void Start()
     {
-        _rigidbody = GetComponent<Rigidbody2D>();
+        
+        
     }
 
     protected void FixedUpdate()
     {
-        //Move();
+        Move();
     }
 
-    /* ¾ÆÀÌÅÛÀÌ µå¶øµÇ¸é ¿òÁ÷ÀÌ°Ô ÇÏ´ÂºÎºÐ
+    
     protected void Move()
     {
-        _rigidbody.AddForce(transform.forward * -speed, ForceMode2D.Force);
-        if(this.transform.position.y <  -maxSizeY ) //ÀÏ´Ü Ä«¸Þ¶ó ¹üÀ§¸¦ ¹þ¾î³ª¸é °­Á¦·Î µ¹¾Æ°¡°Ô ÇÏ´Âµ¥ ´Ù¸¥ ÀÌµ¿¹æ½ÄÀ» »ý°¢ ÇØ º¸±â
+        _rigidbody.velocity = move*speed;
+        if (this.transform.position.y <  -maxSizeY || this.transform.position.y >= maxSizeY) //ï¿½Ï´ï¿½ Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½î³ªï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ°ï¿½ï¿½ï¿½ ï¿½Ï´Âµï¿½ ï¿½Ù¸ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         {
-            
-        }else if(this.transform.position.x > maxSizeX || this.transform.position.x < -maxSizeX)
-        {
-
+            move = new Vector2(this.transform.position.x,this.transform.position.y*-1).normalized;
         }
-    }
-    */
+        if(this.transform.position.x >= maxSizeX || this.transform.position.x < -maxSizeX)
+        {
+            move = new Vector2(this.transform.position.x * -1,this.transform.position.y).normalized;
+        }
+    }   
 }
