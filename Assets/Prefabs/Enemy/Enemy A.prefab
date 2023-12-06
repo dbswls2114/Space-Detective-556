@@ -171,6 +171,9 @@ MonoBehaviour:
   bulletPos: {fileID: 8460007316368200685}
   bulletObj: {fileID: 1652200204203127981, guid: 10c259fd5193e4941a84aca14fa701eb, type: 3}
   player: {fileID: 7500214135229030213, guid: fa37d81f195c97148ab13e785187dd72, type: 3}
+  sprites:
+  - {fileID: 8414478535512612329, guid: 138040323294fd440a3a823e5d70ad01, type: 3}
+  - {fileID: 4326287474489854147, guid: 138040323294fd440a3a823e5d70ad01, type: 3}
 --- !u!95 &3129260998679173256
 Animator:
   serializedVersion: 5

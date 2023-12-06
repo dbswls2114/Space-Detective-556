@@ -34,6 +34,7 @@ public class Enemy : MonoBehaviour
 
     Rigidbody2D rigidbody;
     SpriteRenderer spriteRenderer;
+    public Sprite[] sprites;
     Animator anim;
 
     private void Awake()
@@ -191,7 +192,9 @@ public class Enemy : MonoBehaviour
     }
     void OnHit (int damage)
     {
-        //hit ani
+        spriteRenderer.sprite = sprites[1];
+        Invoke("ReturnSprite", 0.1f);
+
         enemyHp -= damage;
         if (enemyHp <= 0)
         {
@@ -199,6 +202,11 @@ public class Enemy : MonoBehaviour
             Destroy(this.gameObject, 0.5f);
             
         }
+    }
+
+    void ReturnSprite()
+    {
+        spriteRenderer.sprite = sprites[0];
     }
 
    

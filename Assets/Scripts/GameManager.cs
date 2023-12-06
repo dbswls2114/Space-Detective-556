@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Linq;
+using System.Runtime.Serialization;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,12 +26,14 @@ public class GameManager : MonoBehaviour
     }
 
     void Start()
-    {
+    {        
         isGameOver= false;
         Time.timeScale= 1.0f;
         TotalScore = 0;
         //GameOver();
         UpdateScore(0); //점수 초기화 
+        AudioManager.instance.PlayBgm(true);
+        
     }
     
     void Update(){ 
@@ -49,5 +52,6 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0.0f;
         isGameOver= true;
     }
+        
 
 }

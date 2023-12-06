@@ -19,7 +19,7 @@ public class AudioManager : MonoBehaviour
     AudioSource[] sfxPlayers;
     int channelIndex;
 
-    public enum Sfx { Dead, Hit, Win, Lose, Item}
+    public enum Sfx { Dead, Eatitem, GameStartButton=4, Lose, PlayerLife, Win}
 
 
     private void Awake()
@@ -54,6 +54,17 @@ public class AudioManager : MonoBehaviour
       
     }
 
+    public void PlayBgm(bool isPlay)
+    {
+        if (isPlay)
+        {
+            bgmPlayer.Play();
+        }
+        else
+        {
+            bgmPlayer.Stop();
+        }
+    }
     public void PlaySfx(Sfx sfx)
     {
         for (int index=0; index < sfxPlayers.Length; index++)
@@ -72,4 +83,4 @@ public class AudioManager : MonoBehaviour
     }
 }
 
-// AudioManager.instance.PlaySfx(AudioManager.Sfx.열거형선택) 
+// AudioManager.instance.PlaySfx(AudioManager.Sfx.열거) 

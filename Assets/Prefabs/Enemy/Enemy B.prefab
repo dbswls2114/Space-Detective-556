@@ -167,6 +167,9 @@ MonoBehaviour:
   bulletPos: {fileID: 5874419006996455282}
   bulletObj: {fileID: 8821196268633962860, guid: 35e5db1a06bb51145bf77b56e34fcec3, type: 3}
   player: {fileID: 7500214135229030213, guid: fa37d81f195c97148ab13e785187dd72, type: 3}
+  sprites:
+  - {fileID: -1147401495359466748, guid: 138040323294fd440a3a823e5d70ad01, type: 3}
+  - {fileID: -7844560889915226194, guid: 138040323294fd440a3a823e5d70ad01, type: 3}
 --- !u!60 &2307366949699224484
 PolygonCollider2D:
   m_ObjectHideFlags: 0

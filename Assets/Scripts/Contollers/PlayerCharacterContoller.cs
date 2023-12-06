@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.IO.LowLevel.Unsafe;
+using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.XR;
 
 public class PlayerCharacterContoller : MonoBehaviour
 {
@@ -14,9 +16,15 @@ public class PlayerCharacterContoller : MonoBehaviour
     private float _timeSinceLastAttack = float.MaxValue;
     protected bool IsAttacking { get; set; }
 
+    Animator anim;
+
+
+    
+
     protected virtual void Update()
     {
         PlayerAttackDelay();
+        anim = GetComponent<Animator>();
     }
 
     private void PlayerAttackDelay()
@@ -40,6 +48,7 @@ public class PlayerCharacterContoller : MonoBehaviour
         {
             Debug.Log("Player Hit");
             // Destroy(gameObject);
+            
         }
     }
 
@@ -51,4 +60,5 @@ public class PlayerCharacterContoller : MonoBehaviour
     {
         OnAttackEvent?.Invoke();
     }
+  
 }
