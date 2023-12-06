@@ -23,7 +23,10 @@ public class PlayerAttack : MonoBehaviour
     }
     private void OnShoot()
     {
-        Createprojectile();
+        if (GameManager.I.Alive == true)
+        {
+            Createprojectile();
+        }
     }
     private void EatPowerUpItem()
     {
