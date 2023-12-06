@@ -2,10 +2,12 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
+    
 
     [Header("#BGM")]
     public AudioClip bgmClip;
@@ -19,8 +21,9 @@ public class AudioManager : MonoBehaviour
     AudioSource[] sfxPlayers;
     int channelIndex;
 
-    public enum Sfx { Dead, Eatitem, GameStartButton=4, Lose, PlayerLife, Win}
+    public enum Sfx { Hit, Eatitem, GameStartButton=4, Lose, PlayerHit, Win, Dead}
 
+    
 
     private void Awake()
     {
@@ -73,6 +76,12 @@ public class AudioManager : MonoBehaviour
 
             if (sfxPlayers[loopIndex].isPlaying)
                 continue;
+
+            int ranIndex = 0;
+            if (sfx == Sfx.Eatitem)
+            {
+                ranIndex = Random.Range(0, 3);
+            }
 
             channelIndex = loopIndex;
             sfxPlayers[loopIndex].clip = sfxClips[(int)sfx];

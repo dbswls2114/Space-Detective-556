@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Boss : MonoBehaviour
@@ -25,6 +26,7 @@ public class Boss : MonoBehaviour
     private void Awake()
     {
         circleCollider = GetComponent<CircleCollider2D>();
+        anim = GetComponent<Animator>();
     }
     void Start()
     {
@@ -79,11 +81,13 @@ public class Boss : MonoBehaviour
     void OnHit(int damage)
     {
         enemyHp -= damage;
+        anim.SetTrigger("isHit");        
         if (enemyHp <= 0)
         {
             anim.SetTrigger("OnExplosion");
+            transform.localScale = Vector3.one * 3f;            
             Destroy(this.gameObject, 0.5f);
-            circleCollider.enabled = false;
+            circleCollider.enabled = false;            
         }
     }
 }

@@ -278,6 +278,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySpawnPointGroup
       objectReference: {fileID: 0}
+    - target: {fileID: 5386867805920371017, guid: 52e6f0fe3156d9a4ca6acffcb412dad2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -379,8 +383,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 539222870}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -0, z: -10}
+  m_LocalScale: {x: 1, y: 0.99996483, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -724,14 +728,15 @@ MonoBehaviour:
   bgmVolume: 0.2
   sfxClips:
   - {fileID: 8300000, guid: 68383a8cf053deb46ad72e48cb1ffbf4, type: 3}
-  - {fileID: 8300000, guid: c4f24bb3e1531b44796fc33c46287cea, type: 3}
-  - {fileID: 8300000, guid: 4fa2aa5edbbdb1f4885ff9fcd341bbaf, type: 3}
-  - {fileID: 8300000, guid: 5fe71794958af0c4e8238336c5fd0994, type: 3}
+  - {fileID: 8300000, guid: 30afbde2438d5084da91c332c0fd32ee, type: 3}
+  - {fileID: 8300000, guid: d51a3528d3afefb4d9040d2b3b3cd242, type: 3}
+  - {fileID: 8300000, guid: d73b2c9ca315dfa418e046802d224390, type: 3}
   - {fileID: 8300000, guid: 2850d803ac2508443b0269a726ddf5ec, type: 3}
   - {fileID: 8300000, guid: c0567def602e0954380b2418df0ce44f, type: 3}
-  - {fileID: 8300000, guid: d1599f0a358d569439429e8e3e4a4018, type: 3}
+  - {fileID: 8300000, guid: a80c46b2d786b2c45a8cba03e23858ae, type: 3}
   - {fileID: 8300000, guid: afaf77996f3228848b7420e5ecb1110e, type: 3}
-  sfxVolume: 0.5
+  - {fileID: 8300000, guid: 8aaf0d3b280b30143b6812697d567f8e, type: 3}
+  sfxVolume: 0.4
   channels: 10
 --- !u!4 &1534986186
 Transform:
@@ -871,6 +876,7 @@ MonoBehaviour:
   isGameOver: 0
   scoreTxt: {fileID: 430913433}
   maxScoreTxt: {fileID: 0}
+  PowerUpItem: {fileID: 7601607896673211512, guid: 077126fea217bcc4ba5c27ae954e24d3, type: 3}
 --- !u!4 &1814495933
 Transform:
   m_ObjectHideFlags: 0

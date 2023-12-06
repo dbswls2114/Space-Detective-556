@@ -57,6 +57,7 @@ public class PlayerCharacterContoller : MonoBehaviour
     {
         if (collision.gameObject.tag == "EnemyBullet")
         {
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.PlayerHit);
             Debug.Log("Player Hit");
             // Destroy(gameObject);
             
@@ -79,6 +80,7 @@ public class PlayerCharacterContoller : MonoBehaviour
 
     private void EatPowerUpItem()
     {
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Eatitem);
         reroad *= 0.9f;
     }
 

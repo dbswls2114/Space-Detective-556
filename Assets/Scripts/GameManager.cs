@@ -51,7 +51,10 @@ public class GameManager : MonoBehaviour
         //해당 객체를 뺴고
     }
 
-    public void GameOver(){ // player의 hp가 0이 되었을때 (3번 맞았을때) 호출 
+    public void GameOver()
+    {
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Win);
+        // player의 hp가 0이 되었을때 (3번 맞았을때) 호출 
         retryBtn.SetActive(true);
         Time.timeScale = 0.0f;
         isGameOver= true;
@@ -62,5 +65,7 @@ public class GameManager : MonoBehaviour
     {
         Instantiate(PowerUpItem, enemyPos, Quaternion.identity);
     }
+
+   
 
 }
