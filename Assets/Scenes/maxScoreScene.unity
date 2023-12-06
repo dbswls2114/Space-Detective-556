@@ -1584,7 +1584,7 @@ GameObject:
   - component: {fileID: 3402126648660961824}
   - component: {fileID: 630320176551327480}
   m_Layer: 5
-  m_Name: lifeIcon
+  m_Name: lifeIcon1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
