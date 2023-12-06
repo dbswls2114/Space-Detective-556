@@ -18,12 +18,12 @@ public class EnemyBullet : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            Debug.Log("Palyer Hit");
+
             Destroy(gameObject);
         }
         else if (collision.gameObject.tag == "Wall")
         {
-            Debug.Log("Wall Hit");
+
             Destroy(gameObject);
         }
     }
