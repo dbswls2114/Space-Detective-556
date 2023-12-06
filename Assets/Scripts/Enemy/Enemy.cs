@@ -34,7 +34,7 @@ public class Enemy : MonoBehaviour
     public GameObject player;
 
     Rigidbody2D rigidbody;
-    SpriteRenderer spriteRenderer;
+    
     Animator anim;
     BoxCollider2D boxCollider;
     CircleCollider2D circleCollider;
@@ -45,7 +45,7 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        
         anim = GetComponent<Animator>();
 
         boxCollider = GetComponent<BoxCollider2D>();
@@ -171,7 +171,6 @@ public class Enemy : MonoBehaviour
     {
         maxShotDelay = 2f;
         shotDelay += Time.deltaTime;
-
         if (shotDelay >= maxShotDelay)
         {
             if (player != null)
@@ -199,10 +198,14 @@ public class Enemy : MonoBehaviour
         }
     }
     void OnHit (int damage)
-    {
+    {        
         enemyHp -= damage;
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
+
+        anim.SetTrigger("isHit");
+
         if (enemyHp <= 0)
-        {
+        {            
             anim.SetTrigger("OnExplosion");
             DieEnemyEvent?.Invoke(this.gameObject.transform.position);
             Destroy(this.gameObject,0.5f);
@@ -211,17 +214,25 @@ public class Enemy : MonoBehaviour
             {
                 case EnemyType.EnemyA:
                     GameManager.I.UpdateScore(10);
+                    transform.localScale = Vector3.one * 0.7f;
+                    
                     circleCollider.enabled = false;
                     break;
                 case EnemyType.EnemyB:
                     GameManager.I.UpdateScore(50);
+                    transform.localScale = Vector3.one * 1f;
                     polygonCollider.enabled = false;
                     break;
                 case EnemyType.EnemyC:
                     GameManager.I.UpdateScore(100);
+                    transform.localScale = Vector3.one * 2f;
                     boxCollider.enabled = false;
                     break;
             }
         }
+        
     }
+
+    
+
 }
