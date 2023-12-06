@@ -140,7 +140,7 @@ public class Enemy : MonoBehaviour
             GameObject instantBullet = Instantiate(bulletObj, bulletPos.position, bulletPos.rotation);
             Rigidbody2D bulletRigidbody = instantBullet.GetComponent<Rigidbody2D>();
             bulletRigidbody.velocity = bulletPos.forward * 2;
-            bulletRigidbody.AddForce(Vector2.down * 10, ForceMode2D.Impulse);
+            bulletRigidbody.AddForce(Vector2.down * 5, ForceMode2D.Impulse);
             maxShotDelay = UnityEngine.Random.Range(3f, 5f);
             shotDelay = 0;
         }
@@ -160,7 +160,7 @@ public class Enemy : MonoBehaviour
                 Vector2 bulletDir = Vector2.down;
                 bulletDir.x -= 0.3f;
                 bulletDir.x += 0.3f * i;
-                instantBullet.GetComponent<Rigidbody2D>().AddForce(bulletDir * 10, ForceMode2D.Impulse);
+                instantBullet.GetComponent<Rigidbody2D>().AddForce(bulletDir * 5, ForceMode2D.Impulse);
             }
             shotDelay = 0;
             maxShotDelay = UnityEngine.Random.Range(3f, 4f);
@@ -179,7 +179,7 @@ public class Enemy : MonoBehaviour
                 instantBullet.transform.position = transform.position;
                 Vector2 bulletDir = player.transform.position - transform.position;
 
-                instantBullet.GetComponent<Rigidbody2D>().AddForce(bulletDir.normalized * 10, ForceMode2D.Impulse);
+                instantBullet.GetComponent<Rigidbody2D>().AddForce(bulletDir.normalized * 5, ForceMode2D.Impulse);
                 shotDelay = 0;
                 maxShotDelay = UnityEngine.Random.Range(3f, 4f);
             }
@@ -207,7 +207,12 @@ public class Enemy : MonoBehaviour
         if (enemyHp <= 0)
         {            
             anim.SetTrigger("OnExplosion");
-            DieEnemyEvent?.Invoke(this.gameObject.transform.position);
+            int ItemRan = UnityEngine.Random.Range(0, 10);
+            if (ItemRan < 2)
+            {
+                GameManager.I.SpawnItem(this.transform.position);
+            }
+            
             Destroy(this.gameObject,0.5f);
 
             switch (enemyType)

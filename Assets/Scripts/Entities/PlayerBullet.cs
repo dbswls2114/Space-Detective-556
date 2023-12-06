@@ -8,12 +8,12 @@ public class PlayerBullet : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            Debug.Log("Enemy Hit");
+
             Destroy(gameObject);
         }
         else if (collision.gameObject.tag == "PlayerBorderBullet")
         {
-            Debug.Log("Wall Hit");
+
             Destroy(gameObject);
         }
     }

@@ -844,7 +844,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2849514141327889972, guid: b4c44cc98ffea0c4cbb39a31530bc1de, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3262476822842922632, guid: b4c44cc98ffea0c4cbb39a31530bc1de, type: 3}
       propertyPath: m_RootOrder
@@ -1222,6 +1222,10 @@ PrefabInstance:
     - target: {fileID: 5386867805920371017, guid: 52e6f0fe3156d9a4ca6acffcb412dad2, type: 3}
       propertyPath: m_Name
       value: EnemySpawnPointGroup
+      objectReference: {fileID: 0}
+    - target: {fileID: 6049965969812099905, guid: 52e6f0fe3156d9a4ca6acffcb412dad2, type: 3}
+      propertyPath: maxSpawnDelay
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

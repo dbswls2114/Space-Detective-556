@@ -9,7 +9,7 @@ public class EnemySpawnPoint : MonoBehaviour
     public GameObject[] enemys;
     public Transform[] spawnPoints;
     public float spawnDelay;
-    public float maxSpawnDelay = 2.5f;
+    public float maxSpawnDelay = 2f;
 
     //public GameObject player;
     void Update()
@@ -18,17 +18,15 @@ public class EnemySpawnPoint : MonoBehaviour
         if (spawnDelay >= maxSpawnDelay)
         {
             EnemysSpawn();
-            maxSpawnDelay = Random.Range(2f, 2.5f);
+            maxSpawnDelay = Random.Range(1f, 2f);
             spawnDelay = 0;
         }
     }
 
     void EnemysSpawn()
     {
-        //Debug.Log("EnemySpawn!");
         int randomEnemy = Random.Range(0, enemys.Length);
-        int ranPoint = Random.Range(0, spawnPoints.Length);
-        
+        int ranPoint = Random.Range(0, spawnPoints.Length);        
 
         Instantiate(enemys[randomEnemy], spawnPoints[ranPoint].position, spawnPoints[ranPoint].rotation);
     }
