@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
     void PlayerRespawnPlay() //리스폰 무적시간
     {
         player.transform.position = Vector3.down * 3.5f;
-        player.SetActive(true);
+        player.transform.GetChild(0).gameObject.SetActive(true);
         playerhitbox.enabled = false;
         Invoke("PlayerRespawnaegis",2f);
         // 리스폰 될 때 애니메이션

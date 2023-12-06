@@ -49,7 +49,8 @@ public class PlayerCharacterContoller : MonoBehaviour
     {
         if (collision.gameObject.tag == "EnemyBullet")
         {
-            gameObject.SetActive(false);
+            gameObject.transform.GetChild(0).gameObject.SetActive(false);
+            GameManager.I.playerhitbox.enabled = false;
             Life--;
             GameManager.I.UpdateLifeIcon();
             Debug.Log("1hit 1hit");
