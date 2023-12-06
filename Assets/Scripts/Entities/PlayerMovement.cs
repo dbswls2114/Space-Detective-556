@@ -25,7 +25,13 @@ public class PlayeriveMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        ApplyMovment(_movementDirection);
+        if (GameManager.I.Alive == true)
+        {
+            ApplyMovment(_movementDirection);
+        } else
+        {
+            ApplyMovment(Vector2.zero);
+        }
     }
 
     private void Move(Vector2 direction)

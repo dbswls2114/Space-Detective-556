@@ -177,7 +177,7 @@ public class Enemy : MonoBehaviour
     {
         maxShotDelay = 2f;
         shotDelay += Time.deltaTime;
-        //Bullet ¼ÒÈ¯
+        //Bullet ï¿½ï¿½È¯
         if (shotDelay >= maxShotDelay)
         {
             //GameObject instantBullet = Instantiate(bulletObj, bulletPos.position, bulletPos.rotation);
