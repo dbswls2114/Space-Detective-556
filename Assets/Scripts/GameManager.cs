@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
         TotalScore = 0;
         //GameOver();
         UpdateScore(0); //점수 초기화 
+
     }
     
     void Update(){ 
@@ -40,6 +41,8 @@ public class GameManager : MonoBehaviour
     public void UpdateScore(int score){ //적을 잡을때마다 호출 
         TotalScore += score;
         scoreTxt.text = TotalScore.ToString();
+
+        //해당 객체를 뺴고
     }
 
     public void GameOver(){ // player의 hp가 0이 되었을때 (3번 맞았을때) 호출 
@@ -64,6 +67,5 @@ public class GameManager : MonoBehaviour
     {
         Instantiate(PowerUpItem, enemyPos, Quaternion.identity);
     }
-
 
 }
