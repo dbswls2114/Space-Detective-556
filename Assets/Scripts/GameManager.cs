@@ -23,10 +23,12 @@ public class GameManager : MonoBehaviour
     public BoxCollider2D playerhitbox;
     public GameObject[] LifeImage;
     private int i = 0;
+    public bool Alive=true;
 
     void Awake()
     {
         I = this;
+        Alive = true;
     }
 
     void Start()
@@ -73,6 +75,7 @@ public class GameManager : MonoBehaviour
     }
     public void PlayerRespawn() //리스폰 시간 딜레이
     {
+        Alive = false;
         Invoke("PlayerRespawnPlay", 2f);
     }
 
@@ -81,11 +84,22 @@ public class GameManager : MonoBehaviour
         player.transform.position = Vector3.down * 3.5f;
         player.transform.GetChild(0).gameObject.SetActive(true);
         playerhitbox.enabled = false;
-        Invoke("PlayerRespawnaegis",2f);
+        StartCoroutine(PlayerRespawnaegis());
+        //Invoke("PlayerRespawnaegis",1.8f);
         // 리스폰 될 때 애니메이션
     }
-    void PlayerRespawnaegis() //리스폰
+    //void PlayerRespawnaegis() //리스폰
+    //{
+    //    Alive = true;
+    //    Invoke("",0.3f);
+    //    playerhitbox.enabled = true;
+    //}
+    IEnumerator PlayerRespawnaegis()
     {
+        yield return new WaitForSeconds(1.8f);
+        Alive = true;
+        yield return new WaitForSeconds(0.2f);
         playerhitbox.enabled = true;
+        yield return null;
     }
 }
