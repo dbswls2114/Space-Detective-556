@@ -23,8 +23,6 @@ public class PlayerCharacterContoller : MonoBehaviour
     protected bool IsAttacking { get; set; }
 
 
-    Animator anim;
-
 
     
 
@@ -38,7 +36,6 @@ public class PlayerCharacterContoller : MonoBehaviour
     protected virtual void Update()
     {
         PlayerAttackDelay();
-        anim = GetComponent<Animator>();
     }
 
     private void PlayerAttackDelay()
@@ -55,22 +52,19 @@ public class PlayerCharacterContoller : MonoBehaviour
         }
     }
 
-    //�ǰ�ó��
+ 
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "EnemyBullet")
         {
 
             AudioManager.instance.PlaySfx(AudioManager.Sfx.PlayerHit);
-            Debug.Log("Player Hit");
-            // Destroy(gameObject);
-            
-
-            gameObject.transform.GetChild(0).gameObject.SetActive(false);
             GameManager.I.playerhitbox.enabled = false;
+            GameManager.I.anim.SetTrigger("isDie");
+
+            //gameObject.transform.GetChild(0).gameObject.SetActive(false);
             Life--;
             GameManager.I.UpdateLifeIcon();
-            Debug.Log("1hit 1hit");
             if (Life == 0)
             {
                 GameManager.I.GameOver();
@@ -79,7 +73,6 @@ public class PlayerCharacterContoller : MonoBehaviour
             {
                 GameManager.I.PlayerRespawn();
             }
-            //���� �� �ִϸ��̼�
         }
         if (collision.gameObject.tag == "PowerUpItem")
         {

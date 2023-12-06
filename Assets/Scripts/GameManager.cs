@@ -26,10 +26,15 @@ public class GameManager : MonoBehaviour
     private int i = 0;
     public bool Alive=true;
 
+    public Animator anim;
+
+
+
     void Awake()
     {
         I = this;
         Alive = true;
+        anim = player.gameObject.transform.GetChild(0).GetComponent<Animator>();
     }
 
     void Start()
@@ -45,12 +50,13 @@ public class GameManager : MonoBehaviour
 
         playerhitbox = player.GetComponent<BoxCollider2D>();
 
+
     }
     
     void Update(){ 
         
     }
-    public void UpdateScore(int score){ //적을 잡을때마다 호출 
+    public void UpdateScore(int score){ 
         TotalScore += score;
         scoreTxt.text = TotalScore.ToString();
     }
@@ -58,7 +64,6 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         AudioManager.instance.PlaySfx(AudioManager.Sfx.Win);
-        // player의 hp가 0이 되었을때 (3번 맞았을때) 호출 
         retryBtn.SetActive(true);
         Time.timeScale = 0.0f;
         isGameOver= true;
@@ -92,27 +97,23 @@ public class GameManager : MonoBehaviour
             Debug.Log(i);
         }
     }
-    public void PlayerRespawn() //리스폰 시간 딜레이
+    public void PlayerRespawn() 
     {
         Alive = false;
+        
         Invoke("PlayerRespawnPlay", 2f);
     }
 
-    void PlayerRespawnPlay() //리스폰 무적시간
+    void PlayerRespawnPlay() 
     {
+        
         player.transform.position = Vector3.down * 3.5f;
         player.transform.GetChild(0).gameObject.SetActive(true);
+
         playerhitbox.enabled = false;
         StartCoroutine(PlayerRespawnaegis());
-        //Invoke("PlayerRespawnaegis",1.8f);
-        // 리스폰 될 때 애니메이션
     }
-    //void PlayerRespawnaegis() //리스폰
-    //{
-    //    Alive = true;
-    //    Invoke("",0.3f);
-    //    playerhitbox.enabled = true;
-    //}
+
     IEnumerator PlayerRespawnaegis()
     {
         yield return new WaitForSeconds(1.8f);
