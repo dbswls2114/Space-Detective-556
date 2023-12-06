@@ -64,8 +64,6 @@ public class Boss : MonoBehaviour
             bulletObj.transform.Rotate(new Vector3(0f, 0f, 360 * i / bullets - 90));
         }
         yield return new WaitForSeconds(4f);
-
-
     }
 
 

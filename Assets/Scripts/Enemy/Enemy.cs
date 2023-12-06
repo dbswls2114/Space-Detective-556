@@ -33,8 +33,6 @@ public class Enemy : MonoBehaviour
 
     public GameObject player;
 
-    public Transform Target;
-
     Rigidbody2D rigidbody;
     SpriteRenderer spriteRenderer;
     Animator anim;

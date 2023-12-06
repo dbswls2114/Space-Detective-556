@@ -28,17 +28,9 @@ public class EnemySpawnPoint : MonoBehaviour
         //Debug.Log("EnemySpawn!");
         int randomEnemy = Random.Range(0, enemys.Length);
         int ranPoint = Random.Range(0, spawnPoints.Length);
-        //Enemy enemy = GetComponent<Enemy>();
-        //enemy.player = player;
+        
 
         Instantiate(enemys[randomEnemy], spawnPoints[ranPoint].position, spawnPoints[ranPoint].rotation);
     }
     
-    //IEnumerator ForwardMoveEnemy()
-    //{
-    //    int randomEnemy = Random.Range(0, enemys.Length);
-
-    //    enemys[randomEnemy].transform.position = Vector2.up * -10;
-    //    yield return null;
-    //}
 }
