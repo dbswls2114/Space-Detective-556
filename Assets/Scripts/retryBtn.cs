@@ -6,6 +6,6 @@ public class retryBtn : MonoBehaviour
 {
     // Start is called before the first frame update
     public void ReGame(){
-        SceneManager.LoadScene("BackgroundScene");
+        SceneManager.LoadScene("StartScene");
     }
 }

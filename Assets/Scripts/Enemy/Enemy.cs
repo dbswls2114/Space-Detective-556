@@ -5,6 +5,7 @@ using UnityEngine;
 using DG.Tweening;
 using TMPro;
 using UnityEngine.UIElements;
+using System;
 //using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class Enemy : MonoBehaviour
@@ -30,15 +31,28 @@ public class Enemy : MonoBehaviour
     public Transform bulletPos;
     public GameObject bulletObj;
 
-    public GameObject player;
+    //public GameObject player;
 
     Rigidbody2D rigidbody;
     SpriteRenderer spriteRenderer;
+    Animator anim;
+    BoxCollider2D boxCollider;
+    CircleCollider2D circleCollider;
+    PolygonCollider2D polygonCollider;
+
+    public event Action<Vector3> DieEnemyEvent; 
 
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
+
+
+        boxCollider = GetComponent<BoxCollider2D>();
+        circleCollider = GetComponent<CircleCollider2D>();
+        polygonCollider = GetComponent<PolygonCollider2D>();
+
     }
 
     void Start()
@@ -62,7 +76,6 @@ public class Enemy : MonoBehaviour
                 StartCoroutine(MovementB1());
                 break;
             case EnemyType.EnemyC:
-                //MovementC();
                 StartCoroutine(MovementC1());
                 break;
         }
@@ -70,8 +83,8 @@ public class Enemy : MonoBehaviour
     
     IEnumerator MovementA1()
     {
-        int ranPointY = Random.Range(1, 5);
-        int ranPointX = Random.Range(-2, 3);
+        int ranPointY = UnityEngine.Random.Range(1, 5);
+        int ranPointX = UnityEngine.Random.Range(-2, 3);
         Vector2 ranVec = new Vector2(ranPointX, ranPointY);
         transform.DOMove(ranVec, 2);
         yield return null;
@@ -81,8 +94,8 @@ public class Enemy : MonoBehaviour
     {
         while (true)
         {
-            float ranPointY = Random.Range(1f, 5f);
-            float ranPointX = Random.Range(-2.2f, 2.2f);
+            float ranPointY = UnityEngine.Random.Range(1f, 5f);
+            float ranPointX = UnityEngine.Random.Range(-2.2f, 2.2f);
             //Vector2 pos = new Vector2(ranPointX, ranPointY);
             Vector2 randomPosition = new Vector2(ranPointX, ranPointY);
 
@@ -101,7 +114,7 @@ public class Enemy : MonoBehaviour
     IEnumerator MovementC1()
     {
         //int ranPointX = Random.Range(-2, 3);
-        float ranPointY = Random.Range(0f, 3f);
+        float ranPointY = UnityEngine.Random.Range(0f, 3f);
         Vector2 randomPosition = new Vector2(transform.position.x, ranPointY);
         transform.DOMove(randomPosition, 7);
 
@@ -131,7 +144,7 @@ public class Enemy : MonoBehaviour
             Rigidbody2D bulletRigidbody = instantBullet.GetComponent<Rigidbody2D>();
             bulletRigidbody.velocity = bulletPos.forward * 2;
             bulletRigidbody.AddForce(Vector2.down * 10, ForceMode2D.Impulse);
-            maxShotDelay = Random.Range(3f, 5f);
+            maxShotDelay = UnityEngine.Random.Range(3f, 5f);
             shotDelay = 0;
         }
     }
@@ -153,7 +166,7 @@ public class Enemy : MonoBehaviour
                 instantBullet.GetComponent<Rigidbody2D>().AddForce(bulletDir * 10, ForceMode2D.Impulse);
             }
             shotDelay = 0;
-            maxShotDelay = Random.Range(3f, 4f);
+            maxShotDelay = UnityEngine.Random.Range(3f, 4f);
         }
     }
 
@@ -173,11 +186,11 @@ public class Enemy : MonoBehaviour
 
             //GameObject instantBullet = Instantiate(bulletObj, bulletPos.position, bulletPos.rotation);
             //instantBullet.transform.position = transform.position;
-            ////Vector2 bulletDir = player.transform.position - transform.position;
+            //Vector2 bulletDir = player.transform.position - transform.position;
 
             //instantBullet.GetComponent<Rigidbody2D>().AddForce(bulletDir.normalized * 10, ForceMode2D.Impulse);
             shotDelay = 0;
-            maxShotDelay = Random.Range(3f, 4f);
+            maxShotDelay = UnityEngine.Random.Range(3f, 4f);
         }
     }
     void OnTriggerEnter2D(Collider2D collision)
@@ -193,8 +206,22 @@ public class Enemy : MonoBehaviour
         enemyHp -= damage;
         if (enemyHp <= 0)
         {
-            //Enemy ав╢б anim
-            Destroy(this.gameObject);
+            anim.SetTrigger("OnExplosion");
+            DieEnemyEvent?.Invoke(this.gameObject.transform.position);
+            Destroy(this.gameObject,0.5f);
+
+            switch (enemyType)
+            {
+                case EnemyType.EnemyA:
+                    circleCollider.enabled = false;
+                    break;
+                case EnemyType.EnemyB:
+                    polygonCollider.enabled = false;
+                    break;
+                case EnemyType.EnemyC:
+                    boxCollider.enabled = false;
+                    break;
+            }
         }
     }
 }
