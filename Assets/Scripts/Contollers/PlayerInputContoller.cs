@@ -6,14 +6,11 @@ using UnityEngine.InputSystem;
 
 
 public class PlayerInputContoller : PlayerCharacterContoller
-
 {
     private Camera _camera;    
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
     Animator anim;
-
-
 
     private void Awake()
     {
@@ -23,9 +20,7 @@ public class PlayerInputContoller : PlayerCharacterContoller
         rigid.freezeRotation = true;
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();  
-    }   
-      
-
+    }
 
 
     public void OnMove(InputValue value)
@@ -33,7 +28,6 @@ public class PlayerInputContoller : PlayerCharacterContoller
         Vector2 moveInput = value.Get<Vector2>().normalized;
         CallMoveEvent(moveInput);
     }
-
     public void OnAttack(InputValue value)
     {
         IsAttacking = value.isPressed;

@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     private int TotalScore; 
     private GameObject[] NumberOfEnemies;
     public static GameManager I;
+    public GameObject PowerUpItem;
     
     void Awake()
     {
@@ -32,19 +33,22 @@ public class GameManager : MonoBehaviour
         TotalScore = 0;
         //GameOver();
         UpdateScore(0); //점수 초기화 
-        AudioManager.instance.PlayBgm(true);
-        
+
+        AudioManager.instance.PlayBgm(true);        
+
     }
     
     void Update(){ 
         NumberOfEnemies = GameObject.FindGameObjectsWithTag("Enemy"); 
         if(NumberOfEnemies.Length == 0){ //enemies가 0일때 
-            //다음 레벨로?? 아님 클리어?? 
+            //다음 레벨로?? 아님 클리어??             
         }
     }
     public void UpdateScore(int score){ //적을 잡을때마다 호출 
         TotalScore += score;
         scoreTxt.text = TotalScore.ToString();
+
+        //해당 객체를 뺴고
     }
 
     public void GameOver(){ // player의 hp가 0이 되었을때 (3번 맞았을때) 호출 
@@ -53,5 +57,10 @@ public class GameManager : MonoBehaviour
         isGameOver= true;
     }
         
+
+    public void SpawnItem(Vector3 enemyPos)
+    {
+        Instantiate(PowerUpItem, enemyPos, Quaternion.identity);
+    }
 
 }

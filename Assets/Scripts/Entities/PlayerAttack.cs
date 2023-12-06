@@ -9,6 +9,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private Transform projectileSpawnPosition;
 
     public GameObject bulletA;
+    public Vector3 bulletScale = Vector3.one;
+
 
     private void Awake()
     {
@@ -17,14 +19,20 @@ public class PlayerAttack : MonoBehaviour
     void Start()
     {
         _contoller.OnAttackEvent += OnShoot;
+        _contoller.EatItem += EatPowerUpItem;
     }
     private void OnShoot()
     {
         Createprojectile();
     }
+    private void EatPowerUpItem()
+    {
+        bulletScale += new Vector3(0.5f, 0.5f, 0.5f);
+    }
     private void Createprojectile()
     {
         GameObject bullet = Instantiate(bulletA, projectileSpawnPosition.position, Quaternion.identity);
+        bullet.transform.localScale = bulletScale;
         Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
         rigid.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
     }
