@@ -27,7 +27,7 @@ Unity로 개발한 비행슈팅게임입니다.
 
    ![image](https://github.com/dbswls2114/Space-Detective-556/assets/89771577/677d73f0-7585-4431-b359-8c603312562c)
 
-    하나의 큰 총알을 발사합니다. 
+    플레이어 방향으로 하나의 큰 총알을 발사합니다. 
    ![image](https://github.com/dbswls2114/Space-Detective-556/assets/89771577/75ed65f5-35ff-462e-8d6f-7e7a3f8364f0)
 
     3개의 총알을 동시에 발사합니다. 
